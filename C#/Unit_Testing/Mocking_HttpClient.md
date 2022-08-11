@@ -47,4 +47,18 @@ public async void ShouldCallCreatePostApi()
         ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Post),
         ItExpr.IsAny<CancellationToken>());
 }
+```  
+  
+**ItExpr** enables an evaluation of the input. In this example the method is only mocked if the **HttpMessage** has the **URI** specified in the evaluating expression.
+```
+        handlerMock
+            .Protected()
+            .SetupSequence<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.Is<HttpRequestMessage>( x => x.RequestUri == new Uri("https://apiendpoint.com/post")),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(response)
+            .ReturnsAsync(response)
+            .ReturnsAsync(response)
+            .ReturnsAsync(responseError);
 ```
