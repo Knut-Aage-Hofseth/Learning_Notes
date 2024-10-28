@@ -7,7 +7,57 @@
 - **All logic is in the class that call the interface method.**
 - **Mock the interface.**
 - **Interface A : Class A contains HttpClient. Class A implements methods for each for each API call you make. Mock Class A and the methods there. You will not need to touch HttpClient.**
+```
+public class ApiCaller : IApiCaller
+{
+    private readonly Httpclient _client;
 
+    public ApiCaller(HttpClient client)
+    {
+        _client = client;
+    }
+
+    public async Task<HttpResponseMessage> CallApiPoint1()
+    {
+        return _client.GetAsync("URL");
+    }
+}
+```
+
+### Test Example with nSubstitute
+```
+[Fact]
+public async void ShouldCallCreatePostApi()
+{
+    //Arrange
+    //Creates a mock of the HttpMesssageHandler class
+
+    var apiCaller = Substitute.For<IApiCaller>
+
+    //This is a dummy of the response a real API call would generate. This needs to be populated ONLY with what will be used by the logic in the method being tested.
+    var response = new HttpResponseMessage
+    {
+        StatusCode = HttpStatusCode.OK,
+        Content = new StringContent(@"{ ""id"": 101 }"),
+    };
+
+    //Sets the return value for the mocked method.
+
+    apiCaller.CallApiPoint1(default).ReturnsForAnyArgs(Task<response>);
+
+    //Remember that when using mocked objects you need to use the Object belonging to the mock.    
+
+    var returnHandler = new ReturnHandler(apiCaller);
+            
+    //Act
+    var result = await returnHandler.GetInfo("URL");
+
+    //Assert
+    result.StatusCode.Should().Be(HttpStatusCode.OK);
+}
+```  
+
+## Obsolete
 
 Methods in HttpClient are not virtual and not set up for mocking. This makes it somewhat of a problem when attempting to mock HttpClient.  
 Setting up an Interface does not solve this issue.  
