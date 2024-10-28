@@ -6,6 +6,8 @@
 - **Return the HttpResponseMessage from the wrap method.**
 - **All logic is in the class that call the interface method.**
 - **Mock the interface.**
+- **Interface A : Class A contains HttpClient. Class A implements methods for each for each API call you make. Mock Class A and the methods there. You will not need to touch HttpClient.**
+
 
 Methods in HttpClient are not virtual and not set up for mocking. This makes it somewhat of a problem when attempting to mock HttpClient.  
 Setting up an Interface does not solve this issue.  
