@@ -1,4 +1,12 @@
 # Mocking HttpClient  
+
+**NB! The proper way of doing this is to not mock HttpClient.**
+- **Make an interface class. This has an instance of HttpClient in it.**
+- **Make a wrap method around the call methods in HttpClient. HttpClient has Get, Post, Put, Patch and Delete methods. Make a wrap method for each enpoint call you make.**
+- **Return the HttpResponseMessage from the wrap method.**
+- **All logic is in the class that call the interface method.**
+- **Mock the interface.**
+
 Methods in HttpClient are not virtual and not set up for mocking. This makes it somewhat of a problem when attempting to mock HttpClient.  
 Setting up an Interface does not solve this issue.  
   
