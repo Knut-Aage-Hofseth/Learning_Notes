@@ -14,3 +14,5 @@ LXC_USE_NFT="false"
 ```
 
 This might need to be redone if waydroid is updated.
+
+Remember to edit with a proper editor that will save it as a shell script.
