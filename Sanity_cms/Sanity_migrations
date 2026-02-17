@@ -1,0 +1,9 @@
+## Sanity migrations
+Jeg lærte to nyttige ting om Sanity som det kan være verdt å vite om hvis vi får videre oppdrag med det.  
+### 1 Interne migrasjoner
+Sanity lagrer innhold i schema, og du kan migrere innhold i Sanity fra ett schema til ett annet. Det gjør det mulig å oppdatere datastructuren (schema) og så migrere eksisterende innhold til det oppdaterte schema.  
+Dette kan kanskje brukes til å hente inn innhold som ikke er i riktig schema, riktig schema er kanskje ikke ferdigstilt, og så bevege seg inkrementelt mot korrekt schema med flere migrasjoner.  
+
+### 2 Web scraping
+Hvis gamle cms ikke tilbyr god ut-migrasjon for innhold, er det mulig å scripte web-scraping i Sanity for å få tak på innholdet.  
+Dette kan da dumpes ned i eller får sitt eget schema, her er jeg usikker, men kan så migreres gradvis over til riktig schema med feilretting og transformasjoner gjort på midlertidige mellom-schema.
