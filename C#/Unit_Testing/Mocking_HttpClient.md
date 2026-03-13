@@ -60,7 +60,7 @@ public async void ShouldCallCreatePostApi()
 ## Obsolete
 
 Methods in HttpClient are not virtual and not set up for mocking. This makes it somewhat of a problem when attempting to mock HttpClient.  
-Setting up an Interface does not solve this issue.  
+Setting up an Interface does not solve this issue. (I did not know the proper way using an interface at that time.)
   
   The solution to this issue lies in HttpMessageHandler, as this class can be mocked. HttpClient invokes HttpMessageHandler methods in such a way that mocking the **SendAsync** (as an example) method in HttpMessageHandler allows for the use of HttpClient in unit tests.  
     
